@@ -34,7 +34,15 @@ namespace TimeLapser
 
 		public VideoCaptureDevice CreateCaptureDevice()
 		{
-			return new VideoCaptureDevice(this.VideoDeviceMoniker) { VideoResolution = Resolution };
+			var device = new VideoCaptureDevice(this.VideoDeviceMoniker) { VideoResolution = Resolution };
+
+			int maxValue, minValue, step, defaultValue;
+			CameraControlFlags ccFlags;
+
+			device.GetCameraPropertyRange(CameraControlProperty.Focus, out minValue, out maxValue, out step, out defaultValue, out ccFlags);
+			//System.Windows.Forms.MessageBox.Show($"{maxValue}, {minValue}");
+            device.SetCameraProperty(CameraControlProperty.Focus, maxValue, CameraControlFlags.Manual);
+			return device;
 		}
 	}
 }
