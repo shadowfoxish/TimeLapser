@@ -41,7 +41,7 @@ namespace TimeLapser
 
 			device.GetCameraPropertyRange(CameraControlProperty.Focus, out minValue, out maxValue, out step, out defaultValue, out ccFlags);
 			//System.Windows.Forms.MessageBox.Show($"{maxValue}, {minValue}");
-            device.SetCameraProperty(CameraControlProperty.Focus, maxValue, CameraControlFlags.Manual);
+            device.SetCameraProperty(CameraControlProperty.Focus, minValue, CameraControlFlags.Manual); //MinValue = furthest focus distance. 
 			return device;
 		}
 	}
